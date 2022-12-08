@@ -1,0 +1,65 @@
+{%  extends 'accounts/main.html' %}
+
+{% block content %}
+
+{%  include 'accounts/status.html' %}
+
+<br>
+
+<div class="row">
+	<div class="col-md-4">
+		<h5>UNITS:</h5>
+		<hr>
+		<div class="card card-body">
+			<table class="table table-sm">
+				<tr>
+					<th>Unit</th>
+					<th>Total Approved</th>
+					<th>Total Pending</th>
+				</tr>
+
+				{% for c in all_cus %}
+					<tr onclick="window.location='/users/{{c.id}}';">
+						<td>{{c.name}}</td>
+						<td>{{c.NoOfAcc}}</td>
+						<td>{{c.NoOfPend}}</td>
+					</tr>
+				{% endfor %}
+
+			</table>
+		</div>
+	</div>
+
+	<div class="col-md-8">
+		<h5>Upcoming approved</h5>
+		<hr>
+		<div class="card card-body">
+			<table class="table table-sm">
+				<tr>
+					<th>Activity</th>
+					<th>Unit</th>
+					<th>Date</th>
+					<th>Location</th>
+					<th>Status</th>
+				</tr>
+
+				{% for r in upcoming_appr %}
+					<tr onclick="window.location='/request/{{r.id}}';">
+						<td>{{r.activity}}</td>
+						<td>{{r.unit.name}}</td>
+						<td>{{r.date_needed}}</td>
+						<td>{{r.facility}}</td>
+						<td>{{r.status}}</td>
+					</tr>
+				{% endfor %}
+		
+			</table>
+		</div>
+	</div>
+
+</div>
+<hr>
+
+
+
+{% endblock %}

@@ -1,0 +1,119 @@
+{%  extends 'accounts/main.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<br>
+<br>
+{% for message in messages %}
+    <p id="messages">{{message}}</p>
+{% endfor %}
+<br>
+<div class="row">
+    <div class="col-md-9">
+        <div class="card card-body">
+
+            <form action="" method="POST" witdh="200">
+
+                {% csrf_token %}
+                {{form}}
+				<br>
+				<br>
+                <input type="submit" class='btn btn-primary' name="submit">
+                
+            </form>
+
+            {% if owner %}
+                <span><a href="{% url 'deleteBooking' booking.id %}">Delete Booking</a></span>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<h4 style="color: red">*Warning* No sensitive information is to be found in any part of the form.</h4>
+<br>
+<br>
+<br>
+{% if updating %}
+<hr>
+<h6>Already approved bookings for same facility on same date</h6>
+<div class="row">
+	<div class="col-md">
+		<div class="card card-body">
+			<table class="table table-sm">
+				<tr>
+					<th>Unit</th>
+                    <th>Activity</th>
+					<th>Facility</th>
+					<th>Date</th>
+					<th>Start Time</th>
+					<th>End Time</th>
+					<th>Date Requested</th>
+					
+				</tr>
+				
+				{% for i in other_approved %}
+					{% if i == booking %}
+					{% else %}
+						<tr onclick="window.location='/request/{{i.id}}';">
+							<td>{{i.unit.name}}</td>
+                            <td>{{i.activity}}</td>
+							<td>{{i.facility}}</td>
+							<td>{{i.date_needed}}</td>
+							<td>{{i.get_starting_time_display}}</td>
+							<td>{{i.get_ending_time_display}}</td>
+							<td>{{i.date_created}}</td>
+						</tr>
+					{% endif %}
+				{% endfor %}
+
+			</table>
+		</div>
+	</div>
+</div>
+<hr>
+<br>
+<br>
+<br>
+<h6>Other pending bookings for same facility on same date</h6>
+<div class="row">
+	<div class="col-md">
+		<div class="card card-body">
+			<table class="table table-sm">
+				<tr>
+					<th>Unit</th>
+                    <th>Activity</th>
+					<th>Facility</th>
+					<th>Date</th>
+					<th>Start Time</th>
+					<th>End Time</th>
+					<th>Date Requested</th>
+					
+				</tr>
+				
+				{% for i in other_pending %}
+					{% if i == booking %}
+					{% else %}
+						<tr onclick="window.location='/request/{{i.id}}';">
+							<td>{{i.unit.name}}</td>
+                            <td>{{i.activity}}</td>
+							<td>{{i.facility}}</td>
+							<td>{{i.date_needed}}</td>
+							<td>{{i.get_starting_time_display}}</td>
+							<td>{{i.get_ending_time_display}}</td>
+							<td>{{i.date_created}}</td>
+						</tr>
+					{% endif %}
+				{% endfor %}
+
+			</table>
+		</div>
+	</div>
+</div>
+<hr>
+<br>
+<br>
+<br>
+{% endif %}
+
+{% endblock %}

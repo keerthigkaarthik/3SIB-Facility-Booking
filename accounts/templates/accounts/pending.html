@@ -1,0 +1,93 @@
+{%  extends 'accounts/main.html' %}
+
+{% block content %}
+
+		<br>
+		{% if mod %}
+			<div class="row">
+			
+				<div class="col-md">
+					<div class="card card-body">
+						<h5>High priority</h5>
+						<hr>
+						<h1 style="text-align: center;padding: 10px;">{{high_pri_pend}}</h1>
+					</div>
+				</div>
+			
+				<div class="col-md">
+					<div class="card card-body">
+						<h5>Medium priority</h5>
+						<hr>
+						<h1 style="text-align: center;padding: 10px;">{{med_pri_pend}}</h1>
+					</div>
+				</div>
+			
+				<div class="col-md">
+					<div class="card card-body">
+						<h5>Low priority</h5>
+						<hr>
+						<h1 style="text-align: center;padding: 10px;">{{low_pri_pend}}</h1>
+					</div>
+				</div>
+			
+			</div>
+		{% endif %}
+		<br>
+		<div class="row">
+			<div class="col">
+				<div class="card card-body">
+					<form method="get">
+						
+						{{filter.form}}
+						
+						<button class="btn btn-primary" type="submit">Search</button>
+					
+					</form>
+				</div>
+			</div>
+			
+		</div>
+		<br>
+		<hr>
+		<p>Date formatted as YYYY-MM-DD</p>
+		<hr>
+		<br>
+
+		<div class="row">
+			<div class="col-md">
+				<div class="card card-body">
+					<h5>Pending Requests</h5>
+				</div>
+				<div class="card card-body">
+					<table class="table" id="pending">
+						<tr>
+							<th>Unit</th>
+							<th>Activity</th>
+							<th>Priority Level</th>
+							<th>Date</th>
+							<th>Facility</th>
+							<th>Start Time</th>
+							<th>End Time</th>
+							<th>Date Requested</th>
+						</tr>
+
+						{% for i in pending_set %}
+							<tr onclick="window.location='/request/{{i.id}}';">
+								<td>{{i.unit.name}}</td>
+								<td>{{i.activity}}</td>
+								<td>{{i.priority_level}}</td>
+								<td>{{i.date_needed}}</td>
+								<td>{{i.facility}}</td>
+								<td>{{i.get_starting_time_display}}</td>
+								<td>{{i.get_ending_time_display}}</td>
+								<td>{{i.date_created}}</td>
+							</tr>
+						{% endfor %}
+						
+					</table>
+				</div>
+			</div>
+			
+		</div>
+
+{% endblock content %}

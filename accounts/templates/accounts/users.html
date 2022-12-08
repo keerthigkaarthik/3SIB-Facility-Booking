@@ -1,0 +1,93 @@
+{%  extends 'accounts/main.html' %}
+
+{% block content %}
+
+	<br>
+
+<div class="row">
+	<div class="col-md">
+		<div class="card card-body">
+			<h5>User: {{user.name}}</h5>
+			<hr>
+			<a class="btn btn-primary  btn-sm btn-block" href="{% url 'createBooking' %}">Create Booking Request</a>
+
+		</div>
+	</div>
+
+	<div class="col-md">
+		<div class="card card-body">
+			<h5>Total Approved</h5>
+			<hr>
+			<h1 style="text-align: center;padding: 10px; color:green;">{{total_approved}}</h1>
+		</div>
+	</div>
+
+	<div class="col-md">
+		<div class="card card-body">
+			<h5>Total Pending</h5>
+			<hr>
+			<h1 style="text-align: center;padding: 10px; color:blue;">{{total_pending}}</h1>
+		</div>
+	</div>
+
+	<div class="col-md">
+		<div class="card card-body">
+			<h5>Total Rejected</h5>
+			<hr>
+			<h1 style="text-align: center;padding: 10px; color:red;">{{total_rejected}}</h1>
+		</div>
+	</div>
+
+</div>
+
+
+<br>
+<div class="row">
+	<div class="col">
+		<div class="card card-body">
+			<form method="get">
+				{{filter.form}}
+		    	<button class="btn btn-primary" type="submit">Search</button>
+		  	</form>
+		</div>
+	</div>
+	
+</div>
+<p>Date formatted as YYYY-MM-DD</p>
+<br>
+
+<div class="row">
+	<div class="col-md">
+		<div class="card card-body">
+			<table class="table table-sm">
+				<tr>
+					<th>Activity</th>
+					<th>Priority Level</th>
+					<th>Facility</th>
+					<th>Date</th>
+					<th>Start Time</th>
+					<th>End Time</th>
+					<th>Date Requested</th>
+					<th>Status</th>
+					
+				</tr>
+				
+				{% for i in bookings %}
+						<tr onclick="window.location='/request/{{i.id}}';">
+							<td>{{i.activity}}</td>
+							<td>{{i.priority_level}}</td>
+							<td>{{i.facility}}</td>
+							<td>{{i.date_needed}}</td>
+							<td>{{i.get_starting_time_display}}</td>
+							<td>{{i.get_ending_time_display}}</td>
+							<td>{{i.date_created}}</td>
+							<td>{{i.status}}</td>
+						</tr>
+				{% endfor %}
+
+			</table>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

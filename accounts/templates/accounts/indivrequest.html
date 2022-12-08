@@ -1,0 +1,40 @@
+{%  extends 'accounts/main.html' %}
+
+{% block content %}
+
+<br>
+<br>
+<h5><a href="{% url 'users' request.unit.id %}">Unit: {{request.unit.name}}</a></h5>
+<h5>Activity: {{request.activity}}</h5>
+<h5>Priority Level: {{request.priority_level}}</h5>
+<h5>Date: {{request.date_needed}}</h5>
+<h5>Location: {{request.facility}}</h5>
+<h5>Start Time: {{request.get_starting_time_display}}</h5>
+<h5>End Time: {{request.get_ending_time_display}}</h5>
+<h5>No. of Pax: {{request.number_of_pax}}</h5>
+<h5>Remarks: {{request.remarks}}</h5>
+<h5>POC: {{request.POC}}</h5>
+<br>
+<h5>Status: {{request.status}}</h5>
+<h5>Date Created: {{request.date_created}}</h5>
+
+
+<br>
+<br>
+{% if mod %}
+<hr>
+    <span class="btn btn-sm btn-info"><a href="{% url 'updateBooking' request.id %}">Update</a></span>
+<hr>
+{% endif %}
+
+{% if owner and request.status == 'Pending' %}
+    <span class="btn btn-sm btn-info"><a href="{% url 'updateBooking' request.id %}">Update</a></span>
+{% endif %}
+
+{% if owner %}
+<hr>
+    <span><a href="{% url 'deleteBooking' request.id %}">Delete Booking</a></span>
+<hr>
+{% endif %}
+
+{% endblock content %}
