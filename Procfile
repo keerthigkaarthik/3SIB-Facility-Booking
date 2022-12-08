@@ -1,0 +1,1 @@
+web: gunicorn bdebooking.wsgi --log-file -
