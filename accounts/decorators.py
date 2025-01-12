@@ -26,7 +26,7 @@ def allowed_users(allowed_roles=[]):
             else:
                 print('You are not allowed to view this page')
                 return redirect('/')
-            return redirect('/')
+            
         return wrapper_func
     return decorator
 
