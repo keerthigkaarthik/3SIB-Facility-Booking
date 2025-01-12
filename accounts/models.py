@@ -75,7 +75,7 @@ class BookingRequest(models.Model):
     PRIORITY = [
         (1, '1 (Bilat/ROT/Test)'),
         (2, '2 (UTS Training Activities)'),
-        (3, '3 (Admin/Cohesion Activities')
+        (3, '3 (Admin/Cohesion Activities)')
     ]
 
     activity = models.CharField(max_length=100)
